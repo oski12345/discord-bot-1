@@ -1,0 +1,1239 @@
+{
+  "command": [
+    {
+      "name": "kick",
+      "actions": [
+        {
+          "name": "sprawdzanie permisji",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "osoba do kick",
+              "category": "Variable",
+              "type": "Get Mentioned User",
+              "messageActionRows": [],
+              "varname": "osoba_do_kick",
+              "vartype": "User",
+              "savevartype": "temp"
+            },
+            {
+              "name": "powód",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "powód",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "2+"
+            },
+            {
+              "name": "wyrzuć osobę",
+              "category": "User Action",
+              "type": "Kick User",
+              "messageActionRows": [],
+              "user": "${tempVars.osoba_do_kick.id}",
+              "reason": "${tempVars.powód}"
+            },
+            {
+              "name": "kick msg",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.guild.id}",
+              "color": "19FF47",
+              "title": "Kick",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "Osoba wyrzucona: ${tempVars.osoba_do_kick.user.tag}\nPowód: ${tempVars.powód} \nModerator/Administrator: ${dbsVars.CommandAuthor.user.tag}",
+              "thumbnail": "${tempVars.osoba_do_kick.user.avatarURL}",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "brak uprawnień",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "messagetext": "Nie posiadasz Permisji! Ziomeczku",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "KICK_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ban",
+      "actions": [
+        {
+          "name": "sprawdzanie permisji_1",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "user_to_ban",
+              "category": "Variable",
+              "type": "Get Mentioned User",
+              "messageActionRows": [],
+              "varname": "userban",
+              "vartype": "User",
+              "savevartype": "temp"
+            },
+            {
+              "name": "ilosc_dni",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "ilosc dni",
+              "vartype": "Number",
+              "savevartype": "temp",
+              "param": "2"
+            },
+            {
+              "name": "powód_1",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "powód",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "3+"
+            },
+            {
+              "name": "zbanuj",
+              "category": "User Action",
+              "type": "Ban User",
+              "messageActionRows": [],
+              "user": "${tempVars.powód}",
+              "reason": "${tempVars.powód}",
+              "days": "${tempVars.powód}${tempVars.ilosc dni}"
+            },
+            {
+              "name": "ban msg",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "974796357804105768",
+              "color": "0303FF",
+              "title": "zbanowany",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "zbanowany: ${tempVars.userban.id}\nPowód:${tempVars.powód}\nIlośc dni: ${tempVars.ilosc dni}\nModerator/Administator: ${dbsVars.CommandAuthor.user.tag}",
+              "thumbnail": "${tempVars.userban.user.avatarURL}",
+              "image": "",
+              "footer": "CrystalRP 2.0",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "brak uprawnień_1",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "messagetext": "Nie posiadasz Permisji! Ziomeczku",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "BAN_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "clear",
+      "actions": [
+        {
+          "name": "ilosc_wiadomosci",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "ilosc_msg",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "check_ilosc",
+          "category": "Variable",
+          "type": "Check Variable Value",
+          "trueActions": [
+            {
+              "name": "check_ilosc_1",
+              "category": "Variable",
+              "type": "Check Variable Value",
+              "trueActions": [
+                {
+                  "name": "clear_action",
+                  "category": "Channel Action",
+                  "type": "Delete All Messages",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "msgcount": "${tempVars.ilosc_msg}"
+                },
+                {
+                  "name": "clear_msg",
+                  "category": "Message",
+                  "type": "Send Message",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "messagetext": "Usunięto ${tempVars.ilosc_msg} wiadomości",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                },
+                {
+                  "name": "czekanie",
+                  "category": "Control",
+                  "type": "Wait",
+                  "messageActionRows": [],
+                  "waitduration": "3",
+                  "unit": "seconds"
+                },
+                {
+                  "name": "usuwanie1",
+                  "category": "Channel Action",
+                  "type": "Delete All Messages",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "msgcount": "1"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "err_msg_1",
+                  "category": "Message",
+                  "type": "Send Message",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "messagetext": "ilość wiadomości do usunięcia powinna wynosić od 2 do 100",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "ilosc_msg",
+              "savevartype": "temp",
+              "compare": "less than",
+              "value": "101"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "err_msg",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "messagetext": "ilość wiadomości do usunięcia powinna wynosić od 2 do 100",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "varname": "ilosc_msg",
+          "savevartype": "temp",
+          "compare": "greater than",
+          "value": "1"
+        }
+      ]
+    },
+    {
+      "name": "bot-status",
+      "actions": [
+        {
+          "name": "status",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "status",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "wybór ststusu",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "online": [
+              {
+                "name": "ustaw status",
+                "category": "Bot Action",
+                "type": "Set Bot Status",
+                "messageActionRows": [],
+                "presencestatus": "online"
+              },
+              {
+                "name": "bot-status1",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "messagetext": "Ustawiono status bota",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "idle": [
+              {
+                "name": "ustaw status_1_1",
+                "category": "Bot Action",
+                "type": "Set Bot Status",
+                "messageActionRows": [],
+                "presencestatus": "idle"
+              },
+              {
+                "name": "bot-status1_1",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "messagetext": "Ustawiono status bota",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "niewidoczny": [
+              {
+                "name": "ustaw status_1_1_1",
+                "category": "Bot Action",
+                "type": "Set Bot Status",
+                "messageActionRows": [],
+                "presencestatus": "invisible"
+              },
+              {
+                "name": "bot-status1_4",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "messagetext": "Ustawiono status bota",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "nie przeszkadzać": [
+              {
+                "name": "ustaw status_1",
+                "category": "Bot Action",
+                "type": "Set Bot Status",
+                "messageActionRows": [],
+                "presencestatus": "dnd"
+              },
+              {
+                "name": "bot-status1_3",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "messagetext": "Ustawiono status bota",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "usun_1",
+                "category": "Channel Action",
+                "type": "Delete All Messages",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "msgcount": "1"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.status}"
+        }
+      ]
+    },
+    {
+      "name": "bot activity",
+      "actions": [
+        {
+          "name": "rodzaj aktywnosci",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "rodzaj",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "treśc aktywnosci",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "treść aktywnosci",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2+"
+        },
+        {
+          "name": "wybór rodzaju aktywnosci",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "granie": [
+              {
+                "name": "ustaw aktywnosc",
+                "category": "Bot Action",
+                "type": "Set Bot Activity",
+                "messageActionRows": [],
+                "activityname": "${tempVars.treść aktywnosci}",
+                "activitytype": "PLAYING",
+                "streamurl": ""
+              },
+              {
+                "name": "bot-activity_msg",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "messagetext": "Ustawiono aktywnosc bota",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            " ogladanie": [
+              {
+                "name": "ustaw aktywnosc_2",
+                "category": "Bot Action",
+                "type": "Set Bot Activity",
+                "messageActionRows": [],
+                "activityname": "${tempVars.treść aktywnosci}",
+                "activitytype": "WATCHING",
+                "streamurl": ""
+              }
+            ],
+            "słuchanie": [
+              {
+                "name": "ustaw aktywnosc_3",
+                "category": "Bot Action",
+                "type": "Set Bot Activity",
+                "messageActionRows": [],
+                "activityname": "${tempVars.treść aktywnosci}",
+                "activitytype": "LISTENING",
+                "streamurl": ""
+              }
+            ],
+            "streamowanie": [
+              {
+                "name": "ustaw aktywnosc_1",
+                "category": "Bot Action",
+                "type": "Set Bot Activity",
+                "messageActionRows": [],
+                "activityname": "${tempVars.treść aktywnosci}",
+                "activitytype": "STREAMING",
+                "streamurl": ""
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.rodzaj}"
+        }
+      ]
+    },
+    {
+      "name": "wl",
+      "actions": [
+        {
+          "name": "usun",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "wli",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "974796356982046757",
+          "color": "3BFF55",
+          "title": "WL-KA",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Wymagamy za nim wejdziecie na poczekalnie i dokładne zapoznanie się z regulaminem naszego serwera, który jest dostępny na kanale regulamin\nJeżeli posiadasz rangę Boostera'a lub Donator'a na naszym serwerze masz pierwszeństwo w kolejce na rekrutacje Whitelist! \n\nŻyczę wszystkim przystępującym do rekrutacji powodzenia! \n\nNie Masz Mutacji Chcesz Zagrac? Spróbuj swoich sił! \nTeraz Pyta: <@${dbsVars.CommandAuthor.id}>",
+          "thumbnail": "",
+          "image": "",
+          "footer": "CrystalRP whitelist",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "pomoc",
+      "actions": [
+        {
+          "name": "usun_1_1",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "help menu",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "1FFF57",
+          "title": "Komendy Bota",
+          "url": "",
+          "authorname": "CrystalRP 2.0",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "komendy\n$wl wysyła na kanał ogłoszenia wl specjalny embed \n$clear ilosc wiadomosci usuwa wiadomosci na danym kanale \n$wlclose wysyła na kanał wl embed ktory infomuje o zamknieciu okienka WL\n$kick wyrzucasz kogoś  \n$ban banujesz kogoś\n$embed <text>\n",
+          "thumbnail": "",
+          "image": "",
+          "footer": "CrystalRP info",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "embed",
+      "actions": [
+        {
+          "name": "usun 2",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "Titel-text",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "Tytuł",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "Titel-text_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "Text",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2+"
+        },
+        {
+          "name": "Menu",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "33FF55",
+          "title": "Wybierz kolor aby wysłac embed",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.Tytuł}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "CrystalRP 2.0",
+          "timestamp": "false",
+          "savetovariable": "ogłoszenia_embed",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "Kolor",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "🟥": [
+              {
+                "name": "wyslij embed",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "color": "FF0303",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟧": [
+              {
+                "name": "wyslij embed_1",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "color": "A19318",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟨": [
+              {
+                "name": "wyslij embed_2",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "color": "FFFFFF",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟩": [
+              {
+                "name": "wyslij embed_3",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "color": "55FF00",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟦": [
+              {
+                "name": "wyslij embed_4",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "color": "0313FF",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟪": [
+              {
+                "name": "wyslij embed_5",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "color": "FF8CE0",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.ogłoszenia_embed.id}",
+          "duration": "0",
+          "reactionemoji": "Emoji",
+          "reactionuser": "EmbedUser",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    },
+    {
+      "name": "zacmienie",
+      "actions": [
+        {
+          "name": "usuń",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "wyslij_zacmienie",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "975868222005993482",
+          "color": "08FF08",
+          "title": "Zaćmienie",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Serwer powrócił po restarcie aby sie połaczyc wpisz w wyszukiwarke: CrystalRP lub pod F8: connect:",
+          "thumbnail": "",
+          "image": "",
+          "footer": "CrystalRP Zaćmienie",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "st",
+      "actions": [
+        {
+          "name": "usun1",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "bot",
+          "category": "Bot Action",
+          "type": "Set Bot Activity",
+          "messageActionRows": [],
+          "activityname": "CrystalRP",
+          "activitytype": "WATCHING",
+          "streamurl": ""
+        },
+        {
+          "name": "bot_st",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "Udało się! bot ogląda teraz CrystalRP <@${dbsVars.CommandAuthor.id}>",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "wlclose",
+      "actions": [
+        {
+          "name": "usun2",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "wl_close",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "974796356982046757",
+          "color": "FF1919",
+          "title": "Wlka zamknięta",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Jeden z wl-chceckerów informuje ze okienko zostało zamkniete, zapraszam jutro!! \nPytał: <@${dbsVars.CommandAuthor.id}>",
+          "thumbnail": "",
+          "image": "",
+          "footer": "CrystalRP Whitelist",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "ankiety",
+      "actions": [
+        {
+          "name": "usun3",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "Titel-text_2",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "Tytuł",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "Titel-text_1_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "Text",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2+"
+        },
+        {
+          "name": "wyslij embed_5_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "974796356801675374",
+          "color": "FF0808",
+          "title": "${tempVars.Tytuł}",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.Text}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "autorole",
+      "actions": [
+        {
+          "name": "usun3_1",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "embed autorole",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FF0505",
+          "title": "AutoRole",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Aby dodac role naciśnij odpowiedni przycisk\n👍: Changelog\n😁 Wyspainfo",
+          "thumbnail": "",
+          "image": "",
+          "footer": "CrystalRP autorole",
+          "timestamp": "false",
+          "savetovariable": "recationmenu",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "auto_role",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "👍": [
+              {
+                "name": "nadaj1",
+                "category": "User Action",
+                "type": "Add Role to User",
+                "messageActionRows": [],
+                "user": "${tempVars.reactionuser.id}",
+                "rolename": "974796356348698750"
+              },
+              {
+                "name": "czekanie1",
+                "category": "Control",
+                "type": "Wait",
+                "messageActionRows": [],
+                "waitduration": "1",
+                "unit": "seconds"
+              },
+              {
+                "name": "2",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "messagetext": "Rola changelog została nadana pomyślnie <@${dbsVars.CommandAuthor.id}>",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "czekanie1_2",
+                "category": "Control",
+                "type": "Wait",
+                "messageActionRows": [],
+                "waitduration": "5",
+                "unit": "seconds"
+              },
+              {
+                "name": "3",
+                "category": "Channel Action",
+                "type": "Delete All Messages",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "msgcount": "1"
+              }
+            ],
+            "😁": [
+              {
+                "name": "nadaj1_1",
+                "category": "User Action",
+                "type": "Add Role to User",
+                "messageActionRows": [],
+                "user": "${tempVars.reactionuser.id}",
+                "rolename": "974796356348698751"
+              },
+              {
+                "name": "czekanie1_1",
+                "category": "Control",
+                "type": "Wait",
+                "messageActionRows": [],
+                "waitduration": "1",
+                "unit": "seconds"
+              },
+              {
+                "name": "2_1",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "messagetext": "Rola wyspainfo została nadana pomyślnie <@${dbsVars.CommandAuthor.id}>",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              },
+              {
+                "name": "czekanie1_1_1",
+                "category": "Control",
+                "type": "Wait",
+                "messageActionRows": [],
+                "waitduration": "5",
+                "unit": "seconds"
+              },
+              {
+                "name": "3_1",
+                "category": "Channel Action",
+                "type": "Delete All Messages",
+                "messageActionRows": [],
+                "channelname": "${dbsVars.CommandChannel.id}",
+                "msgcount": "1"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.recationmenu.id}",
+          "duration": "0",
+          "reactionemoji": "reactionemoji",
+          "reactionuser": "reactionuser",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    },
+    {
+      "name": "off",
+      "actions": [
+        {
+          "name": "usun1_1",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "bot_1",
+          "category": "Bot Action",
+          "type": "Set Bot Activity",
+          "messageActionRows": [],
+          "activityname": "Serwer OFF ",
+          "activitytype": "WATCHING",
+          "streamurl": ""
+        },
+        {
+          "name": "bot_st_1",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "Przykro mi bardzo serwer CrystalRP Jest aktualnie wyłaczony <@${dbsVars.CommandAuthor.id}>",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "ogloszenia",
+      "actions": [
+        {
+          "name": "usun 2_1",
+          "category": "Channel Action",
+          "type": "Delete All Messages",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "msgcount": "1"
+        },
+        {
+          "name": "Titel-text_3",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "Tytuł",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "Titel-text_1_2",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "Text",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2+"
+        },
+        {
+          "name": "Menu_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "33FF55",
+          "title": "Wybierz kolor aby wysłac embed",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.Text}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "CrystalRP 2.0",
+          "timestamp": "false",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "Kolor_1",
+          "category": "Reaction",
+          "type": "Add Reaction Listener",
+          "reactionActions": {
+            "🟥": [
+              {
+                "name": "wyslij embed_6",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "975741836754841670",
+                "color": "FF0303",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟧": [
+              {
+                "name": "wyslij embed_1_1",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "975741836754841670",
+                "color": "FF8066",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟨": [
+              {
+                "name": "wyslij embed_2_1",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "975741836754841670",
+                "color": "E8FF14",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟩": [
+              {
+                "name": "wyslij embed_3_1",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "975741836754841670",
+                "color": "55FF00",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟦": [
+              {
+                "name": "wyslij embed_4_1",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "975741836754841670",
+                "color": "0313FF",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ],
+            "🟪": [
+              {
+                "name": "wyslij embed_5_2",
+                "category": "Message",
+                "type": "Send Embed",
+                "messageActionRows": [],
+                "channelname": "975741836754841670",
+                "color": "FF8CE0",
+                "title": "${tempVars.Tytuł}",
+                "url": "",
+                "authorname": "",
+                "authorimageurl": "",
+                "authorlink": "",
+                "description": "${tempVars.Text}",
+                "thumbnail": "",
+                "image": "",
+                "footer": "",
+                "timestamp": "BOOL_TRUE@@",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "message": "${tempVars.ogłoszenia_embed.id}",
+          "duration": "0",
+          "reactionemoji": "Emoji",
+          "reactionuser": "EmbedUser",
+          "react": "BOOL_TRUE@@"
+        }
+      ]
+    }
+  ]
+}
